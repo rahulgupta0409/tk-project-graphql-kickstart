@@ -1,0 +1,10 @@
+extend type Mutation {
+    createLabTest(labTestDto: LabTestDto): GenericResponse
+}
+
+input LabTestDto{
+    id: Int
+    testName: String
+    testCost: Int
+    labCost: Int
+}

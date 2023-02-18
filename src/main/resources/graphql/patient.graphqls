@@ -1,0 +1,72 @@
+extend type Query{
+    getById(id: Int): Patient
+    getAllPatient(offset: Int, pageSize: Int): [Patient]
+}
+extend type Mutation {
+    createPatient(patientDto: PatientInputDto): GenericResponse
+}
+
+type PatientDto{
+    id: Int
+    firstName: String
+    lastName: String
+    dataOfBirth: String
+    age: Int
+    createdDate: String
+    drReferral: String
+    totalCost: Int
+    isDue: Boolean
+    due: Int
+    discount: Int
+    phoneNumber: String
+    emailId: String
+    createdBy: String
+    createdOn: String
+    updatedBy: String
+    updatedOn: String
+}
+input PatientInputDto{
+    id: Int
+    firstName: String
+    lastName: String
+    dataOfBirth: String
+    age: Int
+    createdDate: String
+    drReferral: String
+    totalCost: Int
+    isDue: Boolean
+    due: Int
+    discount: Int
+    phoneNumber: String
+    emailId: String
+    createdBy: String
+    createdOn: String
+    updatedBy: String
+    updatedOn: String
+}
+type Patient{
+    id: Int
+    firstName: String
+    lastName: String
+    dataOfBirth: String
+    age: Int
+    createdDate: String
+    drReferral: String
+    totalCost: Int
+    isDue: Boolean
+    due: Int
+    discount: Int
+    phoneNumber: String
+    emailId: String
+    createdBy: String
+    createdOn: String
+    updatedBy: String
+    updatedOn: String
+}
+
+type GenericResponse{
+    status: String
+    message: String
+    updatedBy: String
+    updatedOn: String
+}
