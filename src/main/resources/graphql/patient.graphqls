@@ -1,6 +1,7 @@
 extend type Query{
     getById(id: Int): Patient
     getAllPatient(offset: Int, pageSize: Int): [Patient]
+    getAllPatientByName(firstName: String, offset: Int, pageSize: Int): [Patient]
 }
 extend type Mutation {
     createPatient(patientDto: PatientInputDto): GenericResponse
@@ -24,6 +25,7 @@ type PatientDto{
     createdOn: String
     updatedBy: String
     updatedOn: String
+    paidAmount: Int
 }
 input PatientInputDto{
     id: Int
@@ -43,6 +45,7 @@ input PatientInputDto{
     createdOn: String
     updatedBy: String
     updatedOn: String
+    paidAmount: Int
 }
 type Patient{
     id: Int
@@ -62,6 +65,7 @@ type Patient{
     createdOn: String
     updatedBy: String
     updatedOn: String
+    paidAmount: Int
 }
 
 type GenericResponse{
@@ -69,4 +73,26 @@ type GenericResponse{
     message: String
     updatedBy: String
     updatedOn: String
+}
+
+type PatientOutputDto{
+    id: Int
+    firstName: String
+    lastName: String
+    dataOfBirth: String
+    age: Int
+    createdDate: String
+    drReferral: String
+    totalCost: Int
+    isDue: Boolean
+    due: Int
+    discount: Int
+    phoneNumber: String
+    emailId: String
+    createdBy: String
+    createdOn: String
+    updatedBy: String
+    updatedOn: String
+    paidAmount: Int
+
 }

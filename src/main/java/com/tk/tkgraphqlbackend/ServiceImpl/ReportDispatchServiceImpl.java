@@ -36,4 +36,14 @@ public class ReportDispatchServiceImpl implements ReportDispatchService {
                 getAllByNamePhoneNumber(firstName, phoneNumber);
         return reportDispatchList;
     }
+
+    @Override
+    public ReportDispatch getAllDispatchedReportById(Long id) {
+        long startTime = System.currentTimeMillis();
+        ReportDispatch reportDispatch = new ReportDispatch();
+        reportDispatch = reportDispatchDao.getById(id);
+        log.info("<<<<get dispatched report by id {} , Total time taken by the Api {} ms",
+                id, System.currentTimeMillis()-startTime);
+        return reportDispatch;
+    }
 }

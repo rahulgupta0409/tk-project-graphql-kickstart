@@ -1,15 +1,15 @@
-package com.tk.tkgraphqlbackend.Dto;
+package com.tk.tkgraphqlbackend.OutputDto;
 
-
-import lombok.*;
-
-import java.math.BigInteger;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientDto {
+public class PatientOutputDto {
     private Long id;
 
     private String firstName;
@@ -46,7 +46,7 @@ public class PatientDto {
 
     private Integer paidAmount;
 
-    public PatientDto(Long id) {
+    public PatientOutputDto(Long id) {
         this.id = id;
     }
 }

@@ -28,7 +28,7 @@ public class PatientServiceImpl implements PatientService {
     private final String emailRegex = "~/(\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,9})/";
 
     @Override
-    public Patient getById(Integer id) {
+    public Patient getById(Long id) {
         long startTime = System.currentTimeMillis();
         Patient patient = new Patient();
         patient = patientRepository.getPatientById(id);
@@ -65,8 +65,9 @@ public class PatientServiceImpl implements PatientService {
         patient.setTotalCost(patientDto.getTotalCost());
         patient.setIsDue(patientDto.getIsDue());
         if(patientDto.getIsDue() == true){
-            patient.setDue(patientDto.getDue());
-            patient.setDiscount(patientDto.getDiscount());
+            patient.setDue(patientDto.getTotalCost()-patientDto.getPaidAmount());
+        }else{
+            patient.setDiscount(patientDto.getTotalCost()-patientDto.getPaidAmount());
         }
         if(patientDto.getPhoneNumber() != null && patientDto.getPhoneNumber()
                 .matches(phoneNumberRegex)) {
@@ -82,4 +83,18 @@ public class PatientServiceImpl implements PatientService {
                 LocalDateTime.now(), System.currentTimeMillis()-startTime);
         return new GenericResponse("SUCCESS","Successfully created",null,null);
     }
+
+    @Override
+    public List<Patient> getAllPatientByName(String firstName, Integer offset, Integer pageSize) {
+        long startTime = System.currentTimeMillis();
+        if(offset == null || offset<0 || pageSize == null || pageSize<1){
+            offset = 0;
+            pageSize = 1000;
+        }
+        List<Patient> patientList = patientRepository.getPatientsByName(firstName, offset, pageSize);
+        log.info("<<<<get Patient informantion by name {} at {}, Total time taken by the Api is {} ms ", firstName ,
+                LocalDateTime.now(), System.currentTimeMillis()-startTime);
+        return patientList;
+    }
+
 }
