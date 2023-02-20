@@ -1,7 +1,5 @@
 package com.tk.tkgraphqlbackend;
 
-import com.tk.tkgraphqlbackend.Dao.PatientDao;
-import com.tk.tkgraphqlbackend.resolver.BookResolver;
 import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLScalarType;
 import graphql.schema.idl.RuntimeWiring;

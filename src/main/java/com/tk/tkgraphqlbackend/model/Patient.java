@@ -51,5 +51,7 @@ public class Patient {
     private String updatedBy;
     @Column(name = "updated_on")
     private String updatedOn;
+    @Column(name = "paid_amount")
+    private Integer paidAmount;
 
 }

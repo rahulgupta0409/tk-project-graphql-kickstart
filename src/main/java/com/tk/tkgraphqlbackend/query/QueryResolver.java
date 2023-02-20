@@ -1,4 +1,4 @@
-package com.tk.tkgraphqlbackend.resolver;
+package com.tk.tkgraphqlbackend.query;
 
 import com.tk.tkgraphqlbackend.Service.LabTestService;
 import com.tk.tkgraphqlbackend.Service.PatientService;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @Slf4j
-public class BookResolver implements GraphQLQueryResolver {
+public class QueryResolver implements GraphQLQueryResolver {
 
     @Autowired
     private PatientService patientService;
@@ -32,7 +32,7 @@ public class BookResolver implements GraphQLQueryResolver {
         return new Book("Learn Graphql", "39842989824");
     }
 
-    public Patient getById(Integer id){
+    public Patient getById(Long id){
         return patientService.getById(id);
     }
 
@@ -46,6 +46,14 @@ public class BookResolver implements GraphQLQueryResolver {
 
     public List<ReportDispatch> getAllDispatched(String firstName, String phoneNumber){
         return reportDispatchService.getAllDispatched(firstName, phoneNumber);
+    }
+
+    public ReportDispatch getAllDispatchedReportById(Long id){
+        return reportDispatchService.getAllDispatchedReportById(id);
+    }
+
+    public List<Patient> getAllPatientByName(String firstName, Integer offset, Integer pageSize){
+        return patientService.getAllPatientByName(firstName, offset, pageSize);
     }
 
 }

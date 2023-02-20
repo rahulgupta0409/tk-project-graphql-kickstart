@@ -10,4 +10,6 @@ public interface ReportDispatchService {
     GenericResponse addDispatchReportTemp(ReportDispatchDto reportDispatchDto);
 
     List<ReportDispatch> getAllDispatched(String firstName, String phoneNumber);
+
+    ReportDispatch getAllDispatchedReportById(Long id);
 }

@@ -47,6 +47,8 @@ public class PatientInputDto {
 
     private String updatedOn;
 
+    private Integer paidAmount;
+
     public PatientInputDto(Long id) {
         this.id = id;
     }
