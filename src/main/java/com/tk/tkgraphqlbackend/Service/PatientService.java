@@ -1,6 +1,5 @@
 package com.tk.tkgraphqlbackend.Service;
 
-import com.tk.tkgraphqlbackend.Dto.PatientDto;
 import com.tk.tkgraphqlbackend.Dto.PatientInputDto;
 import com.tk.tkgraphqlbackend.model.Patient;
 import com.tk.tkgraphqlbackend.response.GenericResponse;

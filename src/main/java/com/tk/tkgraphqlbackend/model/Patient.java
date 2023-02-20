@@ -15,7 +15,8 @@ import java.math.BigInteger;
 @Table(name = "patient_table_new_new")
 public class Patient {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "patient_new_new_generator")
+    @SequenceGenerator(name = "patient_new_new_generator", sequenceName = "patient_table_new_new_seq", allocationSize = 1)
     @Column(name = "id")
     private Long id;
     @Column(name = "first_name")

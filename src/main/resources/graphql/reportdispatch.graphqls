@@ -1,0 +1,23 @@
+extend type Mutation {
+    addDispatchReportTemp(reportDispatchDto: ReportDispatchDto): GenericResponse
+}
+
+extend type Query {
+    getAllDispatched(firstName: String!, phoneNumber: String!): [ReportDispatch]
+}
+
+input ReportDispatchDto{
+    id: Int
+    firstName: String!
+    phoneNumber: String!
+    isDispatch: Boolean
+}
+
+type ReportDispatch{
+    id: Int
+    firstName: String
+    phoneNumber: String
+    isDispatch: Boolean
+
+}
+
