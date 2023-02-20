@@ -9,16 +9,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LabTestDto {
+public class ReportDispatchDto {
     private Long id;
 
-    private String testName;
+    private String firstName;
 
-    private Integer testCost;
+    private String phoneNumber;
 
-    private Integer labCost;
-
-    public LabTestDto(Long id) {
-        this.id = id;
-    }
+    private Boolean isDispatch;
 }

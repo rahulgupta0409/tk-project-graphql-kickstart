@@ -2,7 +2,18 @@ extend type Mutation {
     createLabTest(labTestDto: LabTestDto): GenericResponse
 }
 
+extend type Query {
+    getAllTests(offset: Int, pageSize: Int): [LabTest]
+}
+
 input LabTestDto{
+    id: Int
+    testName: String
+    testCost: Int
+    labCost: Int
+}
+
+type LabTest{
     id: Int
     testName: String
     testCost: Int

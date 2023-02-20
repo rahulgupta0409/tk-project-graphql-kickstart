@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -30,5 +33,19 @@ public class LabTestServiceImpl implements LabTestService {
                 System.currentTimeMillis()-startTime);
         return new GenericResponse("Success", "Successfully created Lab test",
                 null, null);
+    }
+
+    @Override
+    public List<LabTest> getAllTests(Integer offset, Integer pageSize) {
+        long startTime = System.currentTimeMillis();
+        if(offset == null || offset<0 || pageSize == null || pageSize<1){
+            offset = 0;
+            pageSize = 1000;
+        }
+        List<LabTest> labTestList = new ArrayList<>();
+        labTestList = labTestDao.getAllLabTests(offset, pageSize);
+        log.info("<<<<get all Lab Test Record , Total time taken by the Api {} ms",
+                System.currentTimeMillis()-startTime);
+        return labTestList;
     }
 }
