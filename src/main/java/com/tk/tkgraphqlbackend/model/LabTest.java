@@ -17,7 +17,10 @@ public class LabTest {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "test_name")
+    @Column(name = "test_id")
+    private Long testId;
+
+    @Column(name = "test_name", unique = true)
     private String testName;
 
     @Column(name = "test_cost")

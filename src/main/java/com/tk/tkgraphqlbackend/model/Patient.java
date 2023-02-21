@@ -23,6 +23,8 @@ public class Patient {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Column(name = "patient_gender")
+    private String patientGender;
     @Column(name = "date_of_birth")
     private String dataOfBirth;
     @Column(name = "age")

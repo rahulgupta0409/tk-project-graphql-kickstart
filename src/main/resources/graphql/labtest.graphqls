@@ -1,5 +1,6 @@
 extend type Mutation {
     createLabTest(labTestDto: LabTestDto): GenericResponse
+    createListOfTests(labTestDtoList: [LabTestDto]): GenericResponse
 }
 
 extend type Query {

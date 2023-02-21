@@ -10,5 +10,7 @@ public interface LabTestService {
 
     GenericResponse createLabTest(LabTestDto labTestDto);
 
+    GenericResponse createListOfTests(List<LabTestDto> labTestDtoList);
+
     List<LabTest> getAllTests(Integer offset, Integer pageSize);
 }

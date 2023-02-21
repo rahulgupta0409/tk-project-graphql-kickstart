@@ -11,6 +11,7 @@ type PatientDto{
     id: Int
     firstName: String
     lastName: String
+    patientGender: String
     dataOfBirth: String
     age: Int
     createdDate: String
@@ -31,6 +32,7 @@ input PatientInputDto{
     id: Int
     firstName: String
     lastName: String
+    patientGender: String
     dataOfBirth: String
     age: Int
     createdDate: String
@@ -51,6 +53,7 @@ type Patient{
     id: Int
     firstName: String
     lastName: String
+    patientGender: String
     dataOfBirth: String
     age: Int
     createdDate: String
@@ -79,6 +82,7 @@ type PatientOutputDto{
     id: Int
     firstName: String
     lastName: String
+    patientGender: String
     dataOfBirth: String
     age: Int
     createdDate: String

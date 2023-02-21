@@ -13,7 +13,10 @@ import com.tk.tkgraphqlbackend.model.Patient;
 import com.tk.tkgraphqlbackend.response.GenericResponse;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 @Controller
 public class MutationResolver implements GraphQLMutationResolver {
@@ -41,6 +44,10 @@ public class MutationResolver implements GraphQLMutationResolver {
 
     public GenericResponse addDispatchReportTemp(ReportDispatchDto reportDispatchDto){
         return reportDispatchService.addDispatchReportTemp(reportDispatchDto);
+    }
+
+    public GenericResponse createListOfTests(List<LabTestDto> labTestDtoList){
+        return labTestService.createListOfTests(labTestDtoList);
     }
 
 }
