@@ -15,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tk.tkgraphqlbackend.util.Constants.OFFSET;
+import static com.tk.tkgraphqlbackend.util.Constants.PAGE_SIZE;
+
 @Service
 @Transactional
 @Slf4j
@@ -42,8 +45,8 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> getAllPatient(Integer offset, Integer pageSize) {
         long startTime = System.currentTimeMillis();
         if(offset == null || offset<0 || pageSize == null || pageSize<1){
-            offset = 0;
-            pageSize = 1000;
+            offset = OFFSET;
+            pageSize = PAGE_SIZE;
         }
         List<Patient> patientList = new ArrayList<>();
         patientList = patientRepository.getAllPatients(offset, pageSize);
@@ -58,6 +61,7 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = new Patient();
         patient.setFirstName(patientDto.getFirstName());
         patient.setLastName(patientDto.getLastName());
+        patient.setPatientGender(patientDto.getPatientGender());
         patient.setDataOfBirth(patientDto.getDataOfBirth());
         patient.setAge(patientDto.getAge());
         patient.setCreatedDate(patientDto.getCreatedDate());
@@ -88,8 +92,8 @@ public class PatientServiceImpl implements PatientService {
     public List<Patient> getAllPatientByName(String firstName, Integer offset, Integer pageSize) {
         long startTime = System.currentTimeMillis();
         if(offset == null || offset<0 || pageSize == null || pageSize<1){
-            offset = 0;
-            pageSize = 1000;
+            offset = OFFSET;
+            pageSize = PAGE_SIZE;
         }
         List<Patient> patientList = patientRepository.getPatientsByName(firstName, offset, pageSize);
         log.info("<<<<get Patient informantion by name {} at {}, Total time taken by the Api is {} ms ", firstName ,

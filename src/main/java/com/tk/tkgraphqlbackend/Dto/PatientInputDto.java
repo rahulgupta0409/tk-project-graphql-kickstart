@@ -19,6 +19,8 @@ public class PatientInputDto {
 
     private String lastName;
 
+    private String patientGender;
+
     private String dataOfBirth;
 
     private Integer age;

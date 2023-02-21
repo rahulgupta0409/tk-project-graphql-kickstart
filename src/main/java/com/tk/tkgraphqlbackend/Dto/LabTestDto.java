@@ -12,6 +12,8 @@ import lombok.Setter;
 public class LabTestDto {
     private Long id;
 
+    private Long testId;
+
     private String testName;
 
     private Integer testCost;

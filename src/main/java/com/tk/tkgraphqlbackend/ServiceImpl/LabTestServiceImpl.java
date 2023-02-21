@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.tk.tkgraphqlbackend.util.Constants.OFFSET;
+import static com.tk.tkgraphqlbackend.util.Constants.PAGE_SIZE;
+
 
 @Service
 @Transactional
@@ -25,6 +28,7 @@ public class LabTestServiceImpl implements LabTestService {
     public GenericResponse createLabTest(LabTestDto labTestDto) {
         long startTime = System.currentTimeMillis();
         LabTest labTest = new LabTest();
+        labTest.setTestId(labTestDto.getTestId());
         labTest.setTestName(labTestDto.getTestName());
         labTest.setLabCost(labTestDto.getLabCost());
         labTest.setTestCost(labTestDto.getTestCost());
@@ -36,11 +40,28 @@ public class LabTestServiceImpl implements LabTestService {
     }
 
     @Override
+    public GenericResponse createListOfTests(List<LabTestDto> labTestDtoList) {
+        long startTime = System.currentTimeMillis();
+        for (LabTestDto labTestDto : labTestDtoList) {
+                LabTest labTest = new LabTest();
+                labTest.setTestId(labTestDto.getTestId());
+                labTest.setTestName(labTestDto.getTestName());
+                labTest.setTestCost(labTestDto.getTestCost());
+                labTest.setLabCost(labTestDto.getLabCost());
+                labTestDao.save(labTest);
+
+        }
+        log.info("<<<<create list of tests, Total time taken by the Api {} ms",
+                System.currentTimeMillis() - startTime);
+        return new GenericResponse("SUCCESS", "Successfully created Lab Test List", null, null);
+    }
+
+    @Override
     public List<LabTest> getAllTests(Integer offset, Integer pageSize) {
         long startTime = System.currentTimeMillis();
         if(offset == null || offset<0 || pageSize == null || pageSize<1){
-            offset = 0;
-            pageSize = 1000;
+            offset = OFFSET;
+            pageSize = PAGE_SIZE;
         }
         List<LabTest> labTestList = new ArrayList<>();
         labTestList = labTestDao.getAllLabTests(offset, pageSize);
