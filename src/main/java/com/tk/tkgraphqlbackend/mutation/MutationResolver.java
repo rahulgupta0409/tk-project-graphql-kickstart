@@ -50,4 +50,8 @@ public class MutationResolver implements GraphQLMutationResolver {
         return labTestService.createListOfTests(labTestDtoList);
     }
 
+    public Patient updatePatient(PatientInputDto patientInputDto){
+        return patientService.updatePatient(patientInputDto);
+    }
+
 }

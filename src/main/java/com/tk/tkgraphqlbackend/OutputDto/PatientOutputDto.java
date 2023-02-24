@@ -16,6 +16,8 @@ public class PatientOutputDto {
 
     private String lastName;
 
+    private String patientGender;
+
     private String dataOfBirth;
 
     private Integer age;
@@ -26,7 +28,7 @@ public class PatientOutputDto {
 
     private Integer totalCost;
 
-    private Boolean isDue;
+    private Boolean isDiscount;
 
     private Integer due;
 

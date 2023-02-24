@@ -10,6 +10,7 @@ public interface PatientService {
     Patient getById(Long id);
     List<Patient> getAllPatient(Integer offset, Integer pageSize);
     GenericResponse createPatient(PatientInputDto patientDto);
+    Patient updatePatient(PatientInputDto patientInputDto);
     List<Patient> getAllPatientByName(String firstName, Integer offset, Integer pageSize);
 
 }

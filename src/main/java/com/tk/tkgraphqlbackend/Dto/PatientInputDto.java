@@ -31,7 +31,7 @@ public class PatientInputDto {
 
     private Integer totalCost;
 
-    private Boolean isDue;
+    private Boolean isDiscount;
 
     private Integer due;
 

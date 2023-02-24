@@ -2,18 +2,24 @@ package com.tk.tkgraphqlbackend.ServiceImpl;
 
 import com.tk.tkgraphqlbackend.Dao.PatientDao;
 import com.tk.tkgraphqlbackend.Dto.PatientInputDto;
+import com.tk.tkgraphqlbackend.OutputDto.PatientOutputDto;
 import com.tk.tkgraphqlbackend.Service.PatientService;
 import com.tk.tkgraphqlbackend.model.Patient;
 import com.tk.tkgraphqlbackend.response.GenericResponse;
+import graphql.kickstart.tools.GraphQLSubscriptionResolver;
 import lombok.extern.slf4j.Slf4j;
+import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.FluxSink;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.tk.tkgraphqlbackend.util.Constants.OFFSET;
 import static com.tk.tkgraphqlbackend.util.Constants.PAGE_SIZE;
@@ -67,11 +73,13 @@ public class PatientServiceImpl implements PatientService {
         patient.setCreatedDate(patientDto.getCreatedDate());
         patient.setDrReferral(patientDto.getDrReferral());
         patient.setTotalCost(patientDto.getTotalCost());
-        patient.setIsDue(patientDto.getIsDue());
-        if(patientDto.getIsDue() == true){
-            patient.setDue(patientDto.getTotalCost()-patientDto.getPaidAmount());
+        patient.setDiscount(patientDto.getDiscount());
+        patient.setPaidAmount(patientDto.getPaidAmount());
+        patient.setIsDiscount(patientDto.getIsDiscount());
+        if(patientDto.getIsDiscount() == true){
+            patient.setDue(patientDto.getTotalCost()-(patientDto.getPaidAmount()+patientDto.getDiscount()));
         }else{
-            patient.setDiscount(patientDto.getTotalCost()-patientDto.getPaidAmount());
+            patient.setDue(patientDto.getTotalCost()-patientDto.getPaidAmount());
         }
         if(patientDto.getPhoneNumber() != null && patientDto.getPhoneNumber()
                 .matches(phoneNumberRegex)) {
@@ -87,6 +95,44 @@ public class PatientServiceImpl implements PatientService {
                 LocalDateTime.now(), System.currentTimeMillis()-startTime);
         return new GenericResponse("SUCCESS","Successfully created",null,null);
     }
+
+    @Override
+    public Patient updatePatient(PatientInputDto patientInputDto) {
+        long startTime = System.currentTimeMillis();
+        Patient patient = patientRepository.getPatientById(patientInputDto.getId());
+        patient.setFirstName(patientInputDto.getFirstName());
+        patient.setLastName(patientInputDto.getLastName());
+        patient.setPatientGender(patientInputDto.getPatientGender());
+        patient.setDataOfBirth(patientInputDto.getDataOfBirth());
+        patient.setAge(patientInputDto.getAge());
+        patient.setCreatedDate(patientInputDto.getCreatedDate());
+        patient.setDrReferral(patientInputDto.getDrReferral());
+        patient.setTotalCost(patientInputDto.getTotalCost());
+        patient.setDiscount(patientInputDto.getDiscount());
+        patient.setPaidAmount(patientInputDto.getPaidAmount());
+        patient.setIsDiscount(patientInputDto.getIsDiscount());
+        if(patientInputDto.getIsDiscount() == true){
+            patient.setDue(patientInputDto.getTotalCost()-(patientInputDto.getPaidAmount()+patientInputDto.getDiscount()));
+        }else{
+            patient.setDue(patientInputDto.getTotalCost()-patientInputDto.getPaidAmount());
+        }
+        if(patientInputDto.getPhoneNumber() != null && patientInputDto.getPhoneNumber()
+                .matches(phoneNumberRegex)) {
+            patient.setPhoneNumber(patientInputDto.getPhoneNumber());
+        }
+        if(patientInputDto.getEmailId()!=null && patientInputDto.getEmailId().matches(emailRegex)) {
+            patient.setEmailId(patientInputDto.getEmailId());
+        }
+        patient.setCreatedBy(patient.getCreatedBy());
+        patient.setCreatedOn(patient.getCreatedOn());
+        patient.setUpdatedBy(patientInputDto.getUpdatedBy());
+        patient.setUpdatedOn(String.valueOf(Timestamp.valueOf(LocalDateTime.now())));
+        patientRepository.save(patient);
+        log.info("<<<<updating new patient {} at {}, Total time taken by the Api is {} ms ", patientInputDto.getFirstName(),
+                LocalDateTime.now(), System.currentTimeMillis()-startTime);
+        return patient;
+    }
+
 
     @Override
     public List<Patient> getAllPatientByName(String firstName, Integer offset, Integer pageSize) {

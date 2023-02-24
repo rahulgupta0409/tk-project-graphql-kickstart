@@ -1,5 +1,6 @@
 package com.tk.tkgraphqlbackend.Dao;
 
+import com.tk.tkgraphqlbackend.OutputDto.PatientOutputDto;
 import com.tk.tkgraphqlbackend.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
