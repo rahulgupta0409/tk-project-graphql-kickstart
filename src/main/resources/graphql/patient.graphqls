@@ -5,6 +5,7 @@ extend type Query{
 }
 extend type Mutation {
     createPatient(patientDto: PatientInputDto): GenericResponse
+    updatePatient(patientInputDto: PatientInputDto): Patient
 }
 
 type PatientDto{
@@ -17,7 +18,7 @@ type PatientDto{
     createdDate: String
     drReferral: String
     totalCost: Int
-    isDue: Boolean
+    isDiscount: Boolean
     due: Int
     discount: Int
     phoneNumber: String
@@ -38,7 +39,7 @@ input PatientInputDto{
     createdDate: String
     drReferral: String
     totalCost: Int
-    isDue: Boolean
+    isDiscount: Boolean
     due: Int
     discount: Int
     phoneNumber: String
@@ -59,7 +60,7 @@ type Patient{
     createdDate: String
     drReferral: String
     totalCost: Int
-    isDue: Boolean
+    isDiscount: Boolean
     due: Int
     discount: Int
     phoneNumber: String
@@ -88,7 +89,7 @@ type PatientOutputDto{
     createdDate: String
     drReferral: String
     totalCost: Int
-    isDue: Boolean
+    isDiscount: Boolean
     due: Int
     discount: Int
     phoneNumber: String

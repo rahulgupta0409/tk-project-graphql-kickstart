@@ -35,8 +35,8 @@ public class Patient {
     private String drReferral;
     @Column(name = "total_cost")
     private Integer totalCost;
-    @Column(name = "is_due")
-    private Boolean isDue;
+    @Column(name = "is_discount")
+    private Boolean isDiscount;
     @Column(name = "due")
     private Integer due;
     @Column(name = "discount")
